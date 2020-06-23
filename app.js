@@ -18,7 +18,7 @@ app.post("/upload", function(req, res) {
         return;
     }
     fs.rename(req.files.myReport.path, "dir\\\\" + req.files.myReport.name, function() {
-        res.end("文件已经上传成功，请同时将该文件交给周老师！");
+        res.end("File uploaded, and please also hand in this file to Ms. Zhou！");
     });
     return;
 });
