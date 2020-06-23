@@ -9,6 +9,9 @@ app.use(formidablemidware({
     multiples: false
 }));
 
+
+app.use("/", express.static("public"));
+
 app.post("/upload", function(req, res) {
     if (!req.files.myReport.name) {
         res.end("请先选择需要上传的文件!");
