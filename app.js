@@ -1,6 +1,7 @@
 var express = require("express");
 var formidablemidware = require("express-formidable");
 var fs = require("fs");
+var sillydt = require("silly-datetime");
 
 var app = express();
 app.use(formidablemidware({
@@ -9,18 +10,25 @@ app.use(formidablemidware({
     multiples: false
 }));
 
+app.get("/", function(req, res) {
+    res.sendFile(__dirname + "/public/index.html");
+})
 
-app.use("/", express.static("public"));
+app.use("/test", express.static("public"));
 
 app.post("/upload", function(req, res) {
+    res.set('Content-Type', 'text/html;charset=UTF-8');
     if (!req.files.myReport.name) {
         res.end("请先选择需要上传的文件!");
         return;
     }
-    fs.rename(req.files.myReport.path, "dir\\\\" + req.files.myReport.name, function() {
-        res.end("File uploaded, and please also hand in this file to Ms. Zhou！");
+    console.log(req.files.myReport.path);
+    fs.rename(req.files.myReport.path, "./my/dir\\\\" + req.files.myReport.name, function() {
+        res.end("文件上传成功，请同时将此文件上交给周老师！");
+        console.log("File <" + req.files.myReport.name + "> uploaded at time:" + sillydt.format(new Date(), 'YYYY-MM-DD HH:mm'));
     });
     return;
 });
 
 app.listen(3000);
+console.log("Web start to run on port: 3000");
