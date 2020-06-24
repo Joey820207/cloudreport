@@ -10,11 +10,7 @@ app.use(formidablemidware({
     multiples: false
 }));
 
-app.get("/", function(req, res) {
-    res.sendFile(__dirname + "/public/index.html");
-})
-
-app.use("/test", express.static("public"));
+app.use("/", express.static("public"));
 
 app.post("/upload", function(req, res) {
     res.set('Content-Type', 'text/html;charset=UTF-8');
