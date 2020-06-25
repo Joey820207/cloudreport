@@ -19,9 +19,9 @@ app.post("/upload", function(req, res) {
         return;
     }
     console.log(req.files.myReport.path);
-    fs.rename(req.files.myReport.path, "./my/dir\\\\" + req.files.myReport.name, function() {
+    fs.rename(req.files.myReport.path, "./my/dir\\\\" + req.fields.myName + "_" + req.files.myReport.name, function() {
         res.end("文件上传成功，请同时将此文件上交给周老师！");
-        console.log("File <" + req.files.myReport.name + "> uploaded at time:" + sillydt.format(new Date(), 'YYYY-MM-DD HH:mm'));
+        console.log(req.fields.myName + " uploaded file <" + req.files.myReport.name + "> at time: " + sillydt.format(new Date(), 'YYYY-MM-DD HH:mm'));
     });
     return;
 });
