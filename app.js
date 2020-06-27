@@ -18,6 +18,10 @@ app.post("/upload", function(req, res) {
         res.end("请先选择需要上传的文件!");
         return;
     }
+    if (!req.fields.myName) {
+        res.end("请先输入你的名字！");
+        return;
+    }
     console.log(req.files.myReport.path);
     fs.rename(req.files.myReport.path, "./my/dir\\\\" + req.fields.myName + "_" + req.files.myReport.name, function() {
         res.end("文件上传成功，请同时将此文件上交给周老师！");
